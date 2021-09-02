@@ -127,10 +127,6 @@ public class ItemUtil {
             return -1;
         } else if ((one.getAmount() != two.getAmount()) && ignoreAmount == false) {
             return -2;
-        } else if ((one.getDurability() != two.getDurability()) && ignoreDurability == false) {
-            if (one.getDurability() < 999 && two.getDurability() < 999) { // wildcard value
-                return -3;
-            }
         }
         if (one.hasItemMeta() || two.hasItemMeta()) {
             if (one.hasItemMeta() && two.hasItemMeta() == false) {
@@ -149,9 +145,15 @@ public class ItemUtil {
                     && ChatColor.stripColor(one.getItemMeta().getDisplayName())
                     .equals(ChatColor.stripColor(two.getItemMeta().getDisplayName())) == false) {
                 return -4;
-            } else if (one.getItemMeta().hasLore() && two.getItemMeta().hasLore() 
-                    && one.getItemMeta().getLore().equals(two.getItemMeta().getLore()) == false) {
-                return -4;
+            } else if (one.getItemMeta().getLore().size() != two.getItemMeta().getLore().size()) {
+            	return -4;
+            } else if (one.getItemMeta().hasLore() && two.getItemMeta().hasLore()) {
+            	for (int i = 0; i < one.getItemMeta().getLore().size(); i++) {
+            		if (!ChatColor.stripColor(one.getItemMeta().getLore().get(i)).equals(
+            				ChatColor.stripColor(two.getItemMeta().getLore().get(i)))) {
+            			return -4;
+            		}
+            	}
             }
             try {
                 final ItemMeta test = one.getItemMeta();

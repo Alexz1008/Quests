@@ -60,6 +60,7 @@ import org.bukkit.material.Crops;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -3730,6 +3731,12 @@ public class Quester implements Comparable<Quester> {
             }
         }
     }
+    
+    class SortByItem implements Comparator<Quest> {
+    	public int compare(Quest a, Quest b) {
+    		return a.getGUIDisplay().getAmount() - b.getGUIDisplay().getAmount();
+    	}
+    }
 
     /**
      * Show an inventory GUI with quest items to the specified player
@@ -3749,6 +3756,8 @@ public class Quester implements Comparable<Quester> {
         final Player player = getPlayer();
         final Inventory inv = plugin.getServer().createInventory(player, ((quests.size() / 9) + 1) * 9, 
                 Lang.get(player, "quests") + " | " + npc.getName());
+        
+        Collections.sort(quests, new SortByItem());
         int i = 0;
         for (final Quest quest : quests) {
             if (quest.guiDisplay != null) {
