@@ -741,21 +741,21 @@ public class Quest implements Comparable<Quest> {
         }
         if (!rews.getCustomRewards().isEmpty()) {
             issuedReward = true;
-            if (plugin.getSettings().getConsoleLogging() > 2) {
-                for (final String s : rews.getCustomRewards().keySet()) {
-                    CustomReward found = null;
-                    for (final CustomReward cr : plugin.getCustomRewards()) {
-                        if (cr.getName().equalsIgnoreCase(s)) {
-                            found = cr;
-                            break;
-                        }
+            for (final String s : rews.getCustomRewards().keySet()) {
+                CustomReward found = null;
+                for (final CustomReward cr : plugin.getCustomRewards()) {
+                    if (cr.getName().equalsIgnoreCase(s)) {
+                        found = cr;
+                        break;
                     }
-                    
-                    if (found != null) {
-                        final Map<String, Object> datamap = rews.getCustomRewards().get(found.getName());
-                        found.giveReward((Player) player, datamap);
-                    }
-                    plugin.getLogger().info(player.getUniqueId() + " was custom rewarded " + s);
+                }
+                
+                if (found != null) {
+                    final Map<String, Object> datamap = rews.getCustomRewards().get(found.getName());
+                    found.giveReward((Player) player, datamap);
+                }
+                if (plugin.getSettings().getConsoleLogging() > 2) {
+                	plugin.getLogger().info(player.getUniqueId() + " was custom rewarded " + s);
                 }
             }
         }
