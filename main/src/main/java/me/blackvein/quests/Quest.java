@@ -743,6 +743,18 @@ public class Quest implements Comparable<Quest> {
             issuedReward = true;
             if (plugin.getSettings().getConsoleLogging() > 2) {
                 for (final String s : rews.getCustomRewards().keySet()) {
+                    CustomReward found = null;
+                    for (final CustomReward cr : plugin.getCustomRewards()) {
+                        if (cr.getName().equalsIgnoreCase(s)) {
+                            found = cr;
+                            break;
+                        }
+                    }
+                    
+                    if (found != null) {
+                        final Map<String, Object> datamap = rews.getCustomRewards().get(found.getName());
+                        found.giveReward((Player) player, datamap);
+                    }
                     plugin.getLogger().info(player.getUniqueId() + " was custom rewarded " + s);
                 }
             }
@@ -953,7 +965,6 @@ public class Quest implements Comparable<Quest> {
                             plugin.getLogger().warning("Failed to notify player: " 
                                     + "Custom Reward does not have an assigned name");
                         }
-                        found.giveReward(p, rews.getCustomRewards().get(s));
                     } else {
                         plugin.getLogger().warning("Quester \"" + player.getName() + "\" completed the Quest \""
                                 + name + "\", but the Custom Reward \"" + s
