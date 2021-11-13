@@ -588,7 +588,7 @@ public class Quest implements Comparable<Quest> {
             issuedReward = true;
             if (plugin.getSettings().getConsoleLogging() > 2) {
                 plugin.getLogger().info(player.getUniqueId() + " was rewarded "
-                        + depends.getVaultEconomy().format(rews.getMoney()));
+                        + depends.getVaultEconomy().format(rews.getMoney()) + " gold");
             }
         }
         if (player.isOnline()) {
@@ -887,7 +887,7 @@ public class Quest implements Comparable<Quest> {
                 }
                 if (rews.getMoney() > 0 && depends.getVaultEconomy() != null) {
                     quester.sendMessage("- " + ChatColor.DARK_GREEN
-                            + depends.getVaultEconomy().format(rews.getMoney()));
+                            + depends.getVaultEconomy().format(rews.getMoney()) + " gold");
                 }
                 if (rews.getExp() > 0 || phatLootExp > 0) {
                     final int tot = rews.getExp() + phatLootExp;
@@ -904,7 +904,7 @@ public class Quest implements Comparable<Quest> {
                                         + rews.getCommandsOverrideDisplay().get(index));
                             }
                         } else {
-                            quester.sendMessage("- " + ChatColor.DARK_GREEN + s);
+                            quester.sendMessage("- " + ChatColor.DARK_GREEN + "Quest Items");
                         }
                         index++;
                     }
