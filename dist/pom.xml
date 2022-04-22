@@ -5,10 +5,15 @@
     <parent>
         <groupId>me.blackvein.quests</groupId>
         <artifactId>quests-parent</artifactId>
-        <version>4.0.6</version>
+        <version>4.4.0</version>
     </parent>
     <artifactId>quests-dist</artifactId>
     <packaging>pom</packaging>
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+    </properties>
 
     <build>
         <plugins>
@@ -19,7 +24,7 @@
                     <finalName>Quests-${project.version}</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                 </configuration>
-                <version>3.1.1</version>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>package-all</id>
@@ -42,7 +47,7 @@
     <dependencies>
         <dependency>
             <groupId>me.blackvein.quests</groupId>
-            <artifactId>quests-main</artifactId>
+            <artifactId>quests-api</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -58,6 +63,11 @@
         <dependency>
             <groupId>me.blackvein.quests</groupId>
             <artifactId>quests-v1_8_R1</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>me.blackvein.quests</groupId>
+            <artifactId>quests-core</artifactId>
             <version>${revision}</version>
         </dependency>
     </dependencies>
