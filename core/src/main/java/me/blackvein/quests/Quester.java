@@ -4519,8 +4519,8 @@ public class Quester implements IQuester {
         }
     }
     
-    class SortByItem implements Comparator<Quest> {
-    	public int compare(Quest a, Quest b) {
+    class SortByItem implements Comparator<IQuest> {
+    	public int compare(IQuest a, IQuest b) {
     		return a.getGUIDisplay().getAmount() - b.getGUIDisplay().getAmount();
     	}
     }
@@ -4550,7 +4550,7 @@ public class Quester implements IQuester {
         }
         final Player player = getPlayer();
         final Inventory inv = plugin.getServer().createInventory(player, ((quests.size() / 9) + 1) * 9, 
-                Lang.get(player, "quests") + " | " + npc.getName());
+                Lang.get(player, "quests") + " | " + name);
         
         Collections.sort(quests, new SortByItem());
         int i = 0;

@@ -748,7 +748,7 @@ public class Quest implements IQuest {
             issuedReward = true;
             if (plugin.getSettings().getConsoleLogging() > 2) {
                 plugin.getLogger().info(player.getUniqueId() + " was rewarded "
-                        + depends.getVaultEconomy().format(rews.getMoney()) + " gold");
+                        + depends.getVaultEconomy().format(rewards.getMoney()) + " gold");
             }
         }
         if (player.isOnline()) {
@@ -901,7 +901,7 @@ public class Quest implements IQuest {
         }
         if (!rewards.getCustomRewards().isEmpty()) {
             issuedReward = true;
-            for (final String s : rews.getCustomRewards().keySet()) {
+            for (final String s : rewards.getCustomRewards().keySet()) {
                 CustomReward found = null;
                 for (final CustomReward cr : plugin.getCustomRewards()) {
                     if (cr.getName().equalsIgnoreCase(s)) {
@@ -911,7 +911,7 @@ public class Quest implements IQuest {
                 }
                 
                 if (found != null) {
-                    final Map<String, Object> datamap = rews.getCustomRewards().get(found.getName());
+                    final Map<String, Object> datamap = rewards.getCustomRewards().get(found.getName());
                     found.giveReward((Player) player, datamap);
                 }
                 if (plugin.getSettings().getConsoleLogging() > 2) {
@@ -1045,7 +1045,7 @@ public class Quest implements IQuest {
                 }
                 if (rewards.getMoney() > 0 && depends.getVaultEconomy() != null) {
                     quester.sendMessage("- " + ChatColor.DARK_GREEN
-                            + depends.getVaultEconomy().format(rews.getMoney()) + " gold");
+                            + depends.getVaultEconomy().format(rewards.getMoney()) + " gold");
                 }
                 if (rewards.getExp() > 0 || phatLootExp > 0) {
                     final int tot = rewards.getExp() + phatLootExp;
